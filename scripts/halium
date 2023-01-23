@@ -499,7 +499,8 @@ unlock_encrypted_partition() {
 	[ -e "/usr/bin/plymouth" ] && plymouth quit || true
 
 	halium_hook setup_touchscreen
-
+	
+        (sleep 5s && echo 2047 > /sys/class/leds/lcd-backlight/brightness &)
 	tries="0"
 	while [ "${1}" ]; do
 		CRYPTTAB_TRIED="${tries}" unl0kr | droidian-encryption-helper --device "${part}" --header "${header}" --name "${name}" --rootmnt "${rootmnt}" --strip-newlines
